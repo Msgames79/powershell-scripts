@@ -20,9 +20,9 @@ $timer = Measure-Command {
         {
             Get-Childitem -Name -Directory -Recurse | Where-Object {$_ -match "^(ncs\.io|musics)$"} | Remove-Item -Recurse -Force
         }
-        while ((Get-Childitem -Name -File -Recurse | Where-Object {$_ -match "^(credits\.txt|wget2\.exe|7zr\.exe|ffmpeg\.7z|log\.txt|ncs.m3u)$"}).Count)
+        while ((Get-Childitem -Name -File -Recurse | Where-Object {$_ -match "^(credits\.txt|wget2\.exe|7zr\.exe|ffmpeg\.7z|log\.txt|ncs.m3u|random.m3u)$"}).Count)
         {
-            Get-Childitem -Name -File -Recurse | Where-Object {$_ -match "^(credits\.txt|wget2\.exe|7zr\.exe|ffmpeg\.7z|log\.txt|ncs.m3u)$"} | Remove-Item -Force -Recurse
+            Get-Childitem -Name -File -Recurse | Where-Object {$_ -match "^(credits\.txt|wget2\.exe|7zr\.exe|ffmpeg\.7z|log\.txt|ncs.m3u|random.m3u)$"} | Remove-Item -Force -Recurse
         }
     }
     $logtext += "Done ($($timer1[0].Hours.ToString().PadLeft(2,"0")):$($timer1[0].Minutes.ToString().PadLeft(2,"0")):$($timer1[0].Seconds.ToString().PadLeft(2,"0")).$($timer1[0].Milliseconds.ToString().PadLeft(3,"0")))`nSetting up files(2/9)..."
@@ -121,6 +121,7 @@ $timer = Measure-Command {
             Get-Childitem -Name -File -Recurse | Where-Object {$_ -match "^(wget2\.exe|7zr\.exe|ffmpeg\.7z)$"} | Remove-Item -Force -Recurse
         }
         Get-ChildItem -n musics | ForEach-Object {"musics\${_}"} | Out-File "ncs.m3u"
+        Get-Content ".\ncs.m3u" | Get-random -shuffle | Out-File ".\random.m3u"
     }
     $date = Get-Date
 }
