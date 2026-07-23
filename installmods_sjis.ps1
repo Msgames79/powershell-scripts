@@ -1,3 +1,4 @@
+# https://github.com/constup/vdf-converter-powershell/blob/master/src%2Fvdf-converter.ps1
 function ConvertTo-PSObject {
     param (
         [Parameter(Mandatory = $true)]
