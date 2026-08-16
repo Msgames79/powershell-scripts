@@ -4,7 +4,7 @@ Remove-Item ((Join-Path $ffmpegpath "ffmpeg.exe"), (Join-Path $ffmpegpath "ffpla
 if ((((Invoke-RestMethod "https://api.github.com/repos/GyanD/codexffmpeg/releases" | Sort-Object "published_at")[-1], (Invoke-RestMethod "https://api.github.com/repos/BtbN/ffmpeg-builds/releases/latest")) | Sort-Object "published_at")[-1].author.login -eq "GyanD") {
     #GyanDの場合
     $tag = (Invoke-RestMethod "https://api.github.com/repos/GyanD/codexffmpeg/releases" | Sort-Object "published_at")[-1].tag_name
-    Invoke-RestMethod "https://github.com/GyanD/codexffmpeg/releases/download/${tag}/ffmpeg-${tag}-full_build.7z" -OutFile (Join-Path $ffmpegpath "ffmpeg.zip")
+    Invoke-RestMethod "https://github.com/GyanD/codexffmpeg/releases/download/${tag}/ffmpeg-${tag}-full_build.zip" -OutFile (Join-Path $ffmpegpath "ffmpeg.zip")
 } else {
     #BtbNの場合
     Invoke-RestMethod "https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-gpl.zip" -OutFile (Join-Path $ffmpegpath "ffmpeg.zip")
