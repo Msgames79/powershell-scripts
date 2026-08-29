@@ -1,6 +1,6 @@
 <#
 OST
-    1.Clear Sky(Clea vf5rSky.ogg)
+    1.Clear Sky(ClearSky.ogg)
     2.Footprint in Stone(FootprintInStone.ogg)
     3.Tomorrow(Tomorrow.ogg)
     4.Labour(LaborDay.ogg)
@@ -27,7 +27,7 @@ OST
 Extra Sounds
     25.IntroDrones
     26.Jonny
-    27.Aztec_0
+    27.Aztec
     28.UnknownArrangement
     29.LockdownArrangement
     30.LabDemo

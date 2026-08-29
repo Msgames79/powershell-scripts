@@ -1,12 +1,12 @@
-Began at 2026-01-18 10:30:50
-Cleaning up files(1/9)...Done (00:00:03.810)
-Setting up files(2/9)...Done (00:00:15.077)
-Downloading HTMLs of each track(3/9)...Done (00:07:32.059)
-Extracting data from HTMLs(4/9)...Done (00:00:41.916)
-Generating urls.txt(5/9)...Done (00:00:00.511)
-Generating credits.txt(6/9)...Done (00:00:00.026)
-Downloading tracks(7/9)...Done (00:06:09.032)
-Re-encoding tracks for more accurate data(8/9)...Done (00:20:55.458)
-Cleaning up files(9/9)...Done (00:00:07.101)
-Completed at 2026-01-18 11:06:35
-Completed this script in 00:35:45.072
+Began at 2026-06-02 20:39:59
+Cleaning up files(1/9)...Done (00:00:02.037)
+Setting up files(2/9)...Done (00:00:18.537)
+Downloading HTMLs of each track(3/9)...Done (00:19:50.323)
+Extracting data from HTMLs(4/9)...Done (00:01:43.817)
+Generating urls.txt(5/9)...Done (00:00:00.121)
+Generating credits.txt(6/9)...Done (00:00:00.061)
+Downloading tracks(7/9)...Done (00:09:26.854)
+Re-encoding tracks for more accurate data(8/9)...Done (00:33:38.536)
+Cleaning up files(9/9)...Done (00:00:13.295)
+Completed at 2026-06-02 21:45:12
+Completed this script in 01:05:13.649
