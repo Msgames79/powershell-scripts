@@ -1,9 +1,9 @@
 $ffmpegpath = "${PSScriptRoot}"
 Set-Location $ffmpegpath
 Remove-Item ((Join-Path $ffmpegpath "ffmpeg.exe"), (Join-Path $ffmpegpath "ffplay.exe"), (Join-Path $ffmpegpath "ffprobe.exe"), (Join-Path $ffmpegpath "ffmpeg.zip"), (Join-Path $ffmpegpath "ffmpeg"), (Join-Path $ffmpegpath "yt-dlp.exe")) -Recurse -Force -ErrorAction SilentlyContinue
-if ((((Invoke-RestMethod "https://api.github.com/repos/GyanD/codexffmpeg/releases" | Sort-Object "published_at")[-1], (Invoke-RestMethod "https://api.github.com/repos/BtbN/ffmpeg-builds/releases/latest")) | Sort-Object "published_at")[-1].author.login -eq "GyanD") {
+if ((((Invoke-RestMethod "https://api.github.com/repos/GyanD/codexffmpeg/releases" | Sort-Object "published_at")[0], (Invoke-RestMethod "https://api.github.com/repos/BtbN/ffmpeg-builds/releases/latest")) | Sort-Object "published_at")[0].author.login -eq "GyanD") {
     #GyanDの場合
-    $tag = (Invoke-RestMethod "https://api.github.com/repos/GyanD/codexffmpeg/releases" | Sort-Object "published_at")[-1].tag_name
+    $tag = (Invoke-RestMethod "https://api.github.com/repos/GyanD/codexffmpeg/releases" | Sort-Object "published_at")[0].tag_name
     Invoke-RestMethod "https://github.com/GyanD/codexffmpeg/releases/download/${tag}/ffmpeg-${tag}-full_build.zip" -OutFile (Join-Path $ffmpegpath "ffmpeg.zip")
 } else {
     #BtbNの場合
