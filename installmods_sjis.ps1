@@ -1,5 +1,6 @@
+# Using vdf converter powered by constup.
 # https://github.com/constup/vdf-converter-powershell/blob/master/src%2Fvdf-converter.ps1
-function ConvertTo-PSObject {
+function ConvertFrom-Vdf {
     param (
         [Parameter(Mandatory = $true)]
         [string]$vdfContent
@@ -57,11 +58,11 @@ function ConvertTo-PSObject {
 }
 
 $flag = $true
-$steampath = "$((Get-ItemProperty -Path "HKCU:\Software\Valve\Steam").SteamPath)\steamapps"
-$vdfPSObject = ConvertTo-PSObject -vdfContent (Get-Content -Raw "${steampath}\libraryfolders.vdf")
+$steampath = Join-Path (Get-ItemProperty -Path "HKCU:\Software\Valve\Steam").SteamPath "steamapps"
+$vdfPSObject = ConvertFrom-Vdf -vdfContent (Get-Content -Raw (Join-Path "${steampath}" "libraryfolders.vdf"))
 for ($i = 0; $i -lt ($vdfPSObject.libraryfolders | Get-Member -membertype noteproperty).Count; $i++) {
     if ($vdfPSObject.libraryfolders."$i".apps.psobject.Properties["477160"]) {
-        $hffpath = "$([Regex]::Replace(($vdfPSObject.libraryfolders."$i".path), "\\\\", "\"))\steamapps\common\Human Fall Flat"
+        $hffpath = Join-Path [Regex]::Replace(($vdfPSObject.libraryfolders."$i".path), "\\\\", "\") "steamapps\common\Human Fall Flat"
         $flag = $false
         break
     }
@@ -75,7 +76,7 @@ if ($flag) {
 Set-Location $hffpath
 
 Remove-Item ("BepInEx", ".doorstop_version", "changelog.txt", "doorstop_config.ini", "winhttp.dll") -Recurse -Force
-Invoke-RestMethod "https://github.com/BepInEx/BepInEx/releases/download/v5.4.23.5/BepInEx_win_x86_5.4.23.5.zip" -outfile "BepInEx.zip"
+Invoke-RestMethod ((Invoke-RestMethod "https://api.github.com/repos/BepInEx/BepInEx/releases/latest").assets | Where-Object {$_.name -match "win" -and $_.name -match "x86"}).browser_download_url -OutFile "BepInEx.zip"
 Expand-Archive ".\BepInEx.zip" "."
 Remove-Item ".\BepInEx.zip"
 Start-Process "steam://rungameid/477160"
