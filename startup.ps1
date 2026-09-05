@@ -1,7 +1,8 @@
 chcp 65001
 $ErrorActionPreference = 'SilentlyContinue'
-Start-Process -FilePath "explorer" -ArgumentList "C:\自分用"
-Start-Process -FilePath "C:\Program Files\NVIDIA Corporation\NVIDIA Broadcast\NVIDIA Broadcast.exe"
+& explorer "C:\自分用"
+& explorer "C:\Program Files\NVIDIA Corporation\NVIDIA Broadcast\NVIDIA Broadcast.exe"
+& "${ENV:LOCALAPPDATA}\Discord\Update.exe" --processStart Discord.exe
 python3 -m pip install -U pip hatchling wheel
 $winget = (Start-Process -FilePath "winget" -ArgumentList "upgrade -ru" -NoNewWindow -PassThru).Id
 Start-Process -FilePath "C:\Program Files\LGHUB\system_tray\lghub_system_tray.exe"
