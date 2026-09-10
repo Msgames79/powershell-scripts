@@ -9,9 +9,9 @@ Start-Process -FilePath "C:\Program Files\LGHUB\system_tray\lghub_system_tray.ex
 Set-Location "C:\Users\Msgames79\AppData\Local\Programs\Python\Python313\Scripts"
 python3 -m pip install -U "yt-dlp[default]"
 Remove-Item ((Join-Path $PWD.Path "ffmpeg.exe"), (Join-Path $PWD.Path "ffplay.exe"), (Join-Path $PWD.Path "ffprobe.exe"), (Join-Path $PWD.Path "ffmpeg.zip"), (Join-Path $PWD.Path "ffmpeg"), (Join-Path $PWD.Path "yt-dlp.exe")) -Recurse -Force -ErrorAction SilentlyContinue
-if ((((Invoke-RestMethod "https://api.github.com/repos/GyanD/codexffmpeg/releases"), (Invoke-RestMethod "https://api.github.com/repos/BtbN/ffmpeg-builds/releases/latest")) | Sort-Object "published_at")[0].author.login -eq "GyanD") {
+if ((((Invoke-RestMethod "https://api.github.com/repos/GyanD/codexffmpeg/releases"), (Invoke-RestMethod "https://api.github.com/repos/BtbN/ffmpeg-builds/releases/latest")) | Sort-Object "published_at" -Descending)[0].author.login -eq "GyanD") {
     #GyanDの場合
-    $tag = (Invoke-RestMethod "https://api.github.com/repos/GyanD/codexffmpeg/releases" | Sort-Object "published_at")[0].tag_name
+    $tag = (Invoke-RestMethod "https://api.github.com/repos/GyanD/codexffmpeg/releases" | Sort-Object "published_at" -Descending)[0].tag_name
     Invoke-RestMethod "https://github.com/GyanD/codexffmpeg/releases/download/${tag}/ffmpeg-${tag}-full_build.zip" -OutFile (Join-Path $PWD.Path "ffmpeg.zip")
 } else {
     #BtbNの場合
