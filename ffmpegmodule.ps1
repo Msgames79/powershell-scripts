@@ -92,7 +92,7 @@ function Update-FFmpeg {
         return
     }
     $ffmpegpath = Split-Path (Get-Command ffmpeg).Source
-        Write-Host "Found ffmpeg in ${ffmpegpath}"
+        Write-Host "Found FFmpeg in ${ffmpegpath}"
         while ((Get-Process | Where-Object {$_.Path -eq (Join-Path $ffmpegpath "ffmpeg.exe") -or $_.Path -eq (Join-Path $ffmpegpath "ffplay.exe") -or $_.Path -eq (Join-Path $ffmpegpath "ffprobe.exe")}).Count) {
             Write-Host "Waiting for $((Get-Process | Where-Object {$_.Path -eq (Join-Path $ffmpegpath "ffmpeg.exe") -or $_.Path -eq (Join-Path $ffmpegpath "ffplay.exe") -or $_.Path -eq (Join-Path $ffmpegpath "ffprobe.exe")})[0].Path)..."
             (Get-Process | Where-Object {$_.Path -eq (Join-Path $ffmpegpath "ffmpeg.exe") -or $_.Path -eq (Join-Path $ffmpegpath "ffplay.exe") -or $_.Path -eq (Join-Path $ffmpegpath "ffprobe.exe")})[0] | Wait-Process
@@ -140,7 +140,7 @@ function Uninstall-FFmpeg {
     }
     while ((Get-Command ffmpeg -ErrorAction SilentlyContinue).Count) {
         $ffmpegpath = Split-Path (Get-Command ffmpeg).Source
-        Write-Host "Found ffmpeg in ${ffmpegpath}"
+        Write-Host "Found FFmpeg in ${ffmpegpath}"
         while ((Get-Process | Where-Object {$_.Path -eq (Join-Path $ffmpegpath "ffmpeg.exe") -or $_.Path -eq (Join-Path $ffmpegpath "ffplay.exe") -or $_.Path -eq (Join-Path $ffmpegpath "ffprobe.exe")}).Count) {
             Write-Host "Waiting for $((Get-Process | Where-Object {$_.Path -eq (Join-Path $ffmpegpath "ffmpeg.exe") -or $_.Path -eq (Join-Path $ffmpegpath "ffplay.exe") -or $_.Path -eq (Join-Path $ffmpegpath "ffprobe.exe")})[0].Path)..."
             (Get-Process | Where-Object {$_.Path -eq (Join-Path $ffmpegpath "ffmpeg.exe") -or $_.Path -eq (Join-Path $ffmpegpath "ffplay.exe") -or $_.Path -eq (Join-Path $ffmpegpath "ffprobe.exe")})[0] | Wait-Process
