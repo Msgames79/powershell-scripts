@@ -1,5 +1,8 @@
 # https://github.com/constup/vdf-converter-powershell/blob/master/src%2Fvdf-converter.ps1
-function ConvertTo-PSObject {
+#Licensed under MPL 2.0
+#https://www.mozilla.org/en-US/MPL/2.0/
+
+function ConvertFrom-Vdf {
     param (
         [Parameter(Mandatory = $true)]
         [string]$vdfContent
@@ -57,11 +60,11 @@ function ConvertTo-PSObject {
 }
 
 $flag = $true
-$steampath = "$((Get-ItemProperty -Path "HKCU:\Software\Valve\Steam").SteamPath)\steamapps"
-$vdfPSObject = ConvertTo-PSObject -vdfContent (Get-Content -Raw "${steampath}\libraryfolders.vdf")
+$steampath = (Get-ItemProperty -Path "HKCU:\Software\Valve\Steam").SteamPath
+$vdfPSObject = ConvertFrom-Vdf -vdfContent (Get-Content -Raw (Join-Path $steampath "steamapps" "libraryfolders.vdf"))
 for ($i = 0; $i -lt ($vdfPSObject.libraryfolders | Get-Member -membertype noteproperty).Count; $i++) {
-    if ($vdfPSObject.libraryfolders."$i".apps.psobject.Properties["477160"]) {
-        $hffpath = "$([Regex]::Replace(($vdfPSObject.libraryfolders."$i".path), "\\\\", "\"))\steamapps\common\Human Fall Flat"
+    if ($vdfPSObject.libraryfolders."${i}".apps."477160") {
+        $hffpath = Join-Path ([Regex]::Replace(($vdfPSObject.libraryfolders."$i".path), "\\\\", "\")) "steamapps" "common" "Human Fall Flat"
         $flag = $false
         break
     }

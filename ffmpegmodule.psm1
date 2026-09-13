@@ -152,5 +152,6 @@ function Uninstall-FFmpeg {
             $ENV:PATH = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + [System.Environment]::GetEnvironmentVariable("Path", "User")
         }
     }
+    Write-Host "Successfully uninstalled from ${ffmpegpath}"
     [System.Console]::TreatControlCAsInput = $false
 }
