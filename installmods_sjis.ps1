@@ -62,7 +62,7 @@ $steampath = Join-Path (Get-ItemProperty -Path "HKCU:\Software\Valve\Steam").Ste
 $vdfPSObject = ConvertFrom-Vdf -vdfContent (Get-Content -Raw (Join-Path "${steampath}" "libraryfolders.vdf"))
 for ($i = 0; $i -lt ($vdfPSObject.libraryfolders | Get-Member -membertype noteproperty).Count; $i++) {
     if ($vdfPSObject.libraryfolders."$i".apps.psobject.Properties["477160"]) {
-        $hffpath = Join-Path [Regex]::Replace(($vdfPSObject.libraryfolders."$i".path), "\\\\", "\") "steamapps\common\Human Fall Flat"
+        $hffpath = Join-Path ([Regex]::Replace(($vdfPSObject.libraryfolders."$i".path), "\\\\", "\").ToString()) "steamapps\common\Human Fall Flat"
         $flag = $false
         break
     }
